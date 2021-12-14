@@ -1,10 +1,29 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+//Angular modules
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-const routes: Routes = [];
+//Components
+import {SearchBooksComponent} from "./books/pages/search-books/search-books.component";
+
+const routes: Routes = [
+  {
+    path: '',
+    component: SearchBooksComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  },
+];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

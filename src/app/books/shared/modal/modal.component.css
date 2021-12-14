@@ -1,0 +1,45 @@
+jw-modal {
+  display: none;
+}
+
+.jw-modal {
+  /* Mantenemos el contenedor del modal fijo en la pantalla */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  /* Aseguramos que el z-index sea mayor al fondo del jw-modal */
+  z-index: 1000;
+  /* Activamos el scroll para el modal */
+  overflow: auto;
+}
+
+.jw-modal-body {
+  padding: 20px;
+  background: #fff;
+  /* Para que el modal no ocupe toda la pantalla y se pueda ver parte del fondo se crea una margen */
+  margin: 200px;
+  text-align: center;
+}
+
+.jw-modal-background {
+  /* Mantenemos el fondo fijo mientras el modal está abierto */
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /*Generamos transparencia para que se pueda ver parte del fondo*/
+  background-color: #000;
+  opacity: 0.75;
+
+  /* El z-index debe ser menor al modal para que el modal pueda superponerse en la pantalla */
+  z-index: 900;
+}
+
+body.jw-modal-open {
+  /* Ocultamos el scrollbar principal mientras el modal está abierto */
+  overflow: hidden;
+}

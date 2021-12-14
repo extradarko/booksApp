@@ -1,0 +1,60 @@
+<div class="p-grid">
+  <div class="p-col-12">
+    <span class="p-input-icon-right">
+      <i class="pi pi-search"></i>
+      <input type="text" pInputText [(ngModel)]="searchTerm" placeholder="Buscar..." (input)="keyPressed()"/>
+    </span>
+    <button style="margin-left: 20px" (click)="getBookList()" pButton type="button">Descargar lista de libros</button>
+  </div>
+
+  <hr class="grid-margin">
+
+  <div class="p-col-12 grid-margin">
+    <div class="card">
+      <p-table responsiveLayout="scroll" [value]="booksArr" [lazy]="true" (onLazyLoad)="loadBooks($event)"
+               [paginator]="true" [rows]="rows" [totalRecords]="totalRecords" [loading]="loading">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Title</th>
+            <th>Subtitle</th>
+            <th>Isbn13</th>
+            <th>Price</th>
+            <th>Url</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-book>
+          <tr>
+            <td style="cursor: pointer" (click)="getBookImg(book)">{{book.title}}</td>
+            <td>{{book.subtitle}}</td>
+            <td>{{book.isbn13}}</td>
+            <td>{{book.price}}</td>
+            <td><a [href]="book.url">{{book.url}}</a></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+
+  <div *ngIf="booksArr.length <= 0" class="p-col-12 grid-margin"
+       [ngClass]="submitted ? 'search-not-found' : 'before-search'">
+    <h1>
+      {{submitted ? 'No se han encontrado resultados con los criterios de búsqueda seleccionados' :
+      'Ingrese un criterio de búsqueda y encuentre sus libros'}}
+      <i *ngIf="!submitted" class="pi pi-book" style="font-size: 2rem"></i>
+    </h1>
+  </div>
+</div>
+
+<!-- ============================================================================================================ -->
+
+<jw-modal id="view-img">
+  <div class="p-grid">
+    <div class="p-col-12">
+      <h1>{{bookTitle}}</h1>
+      <img [src]="bookImg" alt="">
+    </div>
+    <div class="p-col-12">
+      <button pButton type="button" (click)="closeModal('view-img');">Close</button>
+    </div>
+  </div>
+</jw-modal>
